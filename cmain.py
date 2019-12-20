@@ -266,8 +266,9 @@ def main(options, modelconf="config/model.conf"):
     train_data, test_data = load_tt_datas(config, reload)
     module = __import__(module, fromlist=True)
     print("saving train_data...")
-    np.savetxt("../train_data.txt", train_data)
-    np.savetxt("../test_data.txt", test_data)
+    
+    np.savetxt("../train_data.txt", train_data.save_samples())
+    np.savetxt("../test_data.txt", test_data.save_samples())
     # setup randomer
 
     Randomer.set_stddev(config['stddev'])
