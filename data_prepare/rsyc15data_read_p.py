@@ -40,9 +40,10 @@ def _load_data(file_path, item2idx, idx_cnt, pro = None, pad_idx=0):
 
     session_data = list(data['SessionId'].values)
     item_event = list(data['ItemId'].values)
-    if pro is not None:
+    print("session_data length: ", len(session_data), "itemid length: ", len(item_event))
+    if pro is not None:     ## skips first session
         lenth = int(len(session_data) / pro)
-        print(lenth)
+        print("pro none: ",lenth)
         session_data = session_data[-lenth:]
         item_event = item_event[-lenth:]
         for i in range(len(session_data)):
@@ -51,7 +52,7 @@ def _load_data(file_path, item2idx, idx_cnt, pro = None, pad_idx=0):
         session_data = session_data[i + 1:]
         item_event = item_event[i + 1:]
     lenth = len(session_data)
-    print(lenth)
+    print("after pro not none loop: ", lenth)
 
     samplepack = Samplepack()
     samples = []
@@ -109,7 +110,7 @@ def _load_data(file_path, item2idx, idx_cnt, pro = None, pad_idx=0):
     sample.in_idxes = in_dixes
     sample.out_idxes = out_dixes
     samples.append(sample)
-    print(sample)
+    print("last sample: ",sample)
 
 
     samplepack.samples = samples
