@@ -12,8 +12,8 @@ from util.FileDumpLoad import dump_file, load_file
 from util.Randomer import Randomer
 # the data path.
 
-root_path = '/home/zyf/code'
-project_name = '/STAMP'
+root_path = ''
+project_name = '.'
 
 # the pretreatment data path.
 
