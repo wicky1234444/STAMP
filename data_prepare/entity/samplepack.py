@@ -54,3 +54,9 @@ class Samplepack(object):
             for x in matrixes:
                 tra_matrix[i].append(x[i])
         return tra_matrix
+    
+    def save_samples(self):
+        sessions = []
+        for sample in self.samples:
+            sessions.append([sample.id, sample.session_id])
+        return sessions
