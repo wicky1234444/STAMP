@@ -265,7 +265,9 @@ def main(options, modelconf="config/model.conf"):
     config['nepoch'] = epoch
     train_data, test_data = load_tt_datas(config, reload)
     module = __import__(module, fromlist=True)
-
+    print("saving train_data...")
+    np.savetxt("../train_data.txt", train_data)
+    np.savetxt("../test_data.txt", test_data)
     # setup randomer
 
     Randomer.set_stddev(config['stddev'])
