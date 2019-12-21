@@ -31,7 +31,7 @@ def _load_data(file_path, item2idx, idx_cnt, pro = None, pad_idx=0):
 
     data = pd.read_csv(file_path, sep='\t', dtype={'ItemId': np.int64})
     print("read finish")
-    if pro is Not None:
+    if pro is not None:
         session_ids = data.SessionId.value_counts().rename_axis("SessionId").reset_index(name="counts")
         session_ids = session_ids[0:100000]     #take only 1 lakh sessions
         data = data[data["SessionId"].isin(session_ids["SessionId"])]
