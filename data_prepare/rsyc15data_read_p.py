@@ -1,8 +1,12 @@
 import pandas as pd
 import numpy as np
+import pickle as pkl
 from data_prepare.entity.sample import Sample
 from data_prepare.entity.samplepack import Samplepack
 
+def save_obj(obj, name ):
+    with open(name + '.pkl', 'wb') as f:
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
 
 def load_data_p(train_file, test_file, pro, pad_idx = 0):
     '''
@@ -21,6 +25,7 @@ def load_data_p(train_file, test_file, pro, pad_idx = 0):
     print(len(items2idx.keys()))
     test_data, idx_cnt = _load_data(test_file, items2idx, idx_cnt, pad_idx = pad_idx)
     print(len(items2idx.keys()))
+    save_obj(item2idx, "item2idx")
 
     item_num = len(items2idx.keys())
     return train_data, test_data, items2idx, item_num
