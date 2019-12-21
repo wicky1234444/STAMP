@@ -265,10 +265,11 @@ def main(options, modelconf="config/model.conf"):
     config['nepoch'] = epoch
     train_data, test_data = load_tt_datas(config, reload)
     module = __import__(module, fromlist=True)
-    print("saving train_data...")
+    #print("saving train_data...")
     
-    np.savetxt("../train_data.txt", train_data.save_samples())
-    np.savetxt("../test_data.txt", test_data.save_samples())
+    #np.savetxt("../train_data.txt", train_data.save_samples())
+    #np.savetxt("../test_data.txt", test_data.save_samples())
+    
     # setup randomer
 
     Randomer.set_stddev(config['stddev'])
@@ -302,7 +303,12 @@ def main(options, modelconf="config/model.conf"):
                     sent_data = test_data
                 saver.restore(sess, model_path)
                 model.test(sess, sent_data)
-
+        print("saving train_data after training...")
+        with open('postTrain_train_data.pkl', 'wb') as f:
+            pkl.dump(train_data, f, pkl.HIGHEST_PROTOCOL)
+        
+        with open('postTrain_test_data.pkl', 'wb') as f:
+            pkl.dump(test_data, f, pkl.HIGHEST_PROTOCOL)
 
 if __name__ == '__main__':
     options = option_parse()
