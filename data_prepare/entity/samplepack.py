@@ -58,5 +58,5 @@ class Samplepack(object):
     def save_samples(self):
         sessions = []
         for sample in self.samples:
-            sessions.append([sample.id, sample.session_id, sample.label, sample.best_pred])
+            sessions.append([sample.id, sample.session_id, sample.label, sample.pred, sample.best_pred])
         return sessions
