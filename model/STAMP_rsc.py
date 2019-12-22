@@ -333,6 +333,7 @@ class Seq2SeqAttNN(NN):
         mrr, recall = [], []
         c_loss =[]
         batch = 0
+        
         bt = batcher(
             samples = test_data.samples,
             class_num = self.n_items,
