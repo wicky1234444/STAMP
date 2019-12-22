@@ -3,6 +3,7 @@ from optparse import OptionParser
 import tensorflow as tf
 import pandas as pd
 import numpy as np
+import pickle as pkl
 from data_prepare.entity.samplepack import Samplepack
 from data_prepare.load_dict import load_random
 from data_prepare.cikm16data_read import load_data2
