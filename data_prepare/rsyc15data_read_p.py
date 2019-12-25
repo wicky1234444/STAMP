@@ -34,30 +34,24 @@ def load_data_p(train_file, test_file, pro, pad_idx = 0):
 
 def _load_data(file_path, item2idx, idx_cnt, pro = None, pad_idx=0):
 
-    data = pd.read_csv(file_path, sep='\t', dtype={'ItemId': np.int64})
-    print("read finish")
+    
     if pro is not None:
+        data = pd.read_csv(file_path, sep='\t', dtype={'ItemId': np.int64})
+        print("train read finish")
         session_ids = data.SessionId.value_counts().rename_axis("SessionId").reset_index(name="counts")
         session_ids = session_ids[0:100000]     #take only 1 lakh sessions
         data = data[data["SessionId"].isin(session_ids["SessionId"])]
         print("list finish")
-        
-    data.sort_values(['SessionId', 'Time'], inplace = True)
-    print("sort finish")
-    session_data = list(data['SessionId'].values)
-    item_event = list(data['ItemId'].values)
+        data.sort_values(['SessionId', 'Time'], inplace = True)
+        print("sort finish")
+        session_data = list(data['SessionId'].values)
+        item_event = list(data['ItemId'].values)
+    else:
+        data = np.load(open(file_path, 'rb'))
+        print("test read finish")
+        session_data = list(data[:,0])
+        item_event = list(data[:,1])
     print("session_data length: ", len(session_data), "itemid length: ", len(item_event))
-    '''if pro is not None:     ## skips first session
-        #lenth = int(len(session_data) / pro)
-        lenth = 100000  ##1lakh sessions
-        print("pro none: ",lenth)
-        session_data = session_data[-lenth:]
-        item_event = item_event[-lenth:]
-        for i in range(len(session_data)):
-            if session_data[i] != session_data[i+1]:
-                break
-        session_data = session_data[i + 1:]
-        item_event = item_event[i + 1:]'''
     lenth = len(session_data)
     print("after pro not none loop: ", lenth)
 
@@ -123,5 +117,3 @@ def _load_data(file_path, item2idx, idx_cnt, pro = None, pad_idx=0):
     samplepack.samples = samples
     samplepack.init_id2sample()
     return samplepack, idx_cnt
-
-
