@@ -53,6 +53,8 @@ def load_tt_datas(config={}, reload=True):
             emb_dict = load_random(item2idx,edim=config['hidden_size'], init_std=config['emb_stddev'])
             config['pre_embedding'] = emb_dict
             path = 'datas/mid_data'
+            print("saving pre embeddings")
+            np.savetxt("pre_embdict.txt", emb_dict)
             dump_file([emb_dict, path+mid_rsc15_4_emb_dict])
             print("-----")
 
